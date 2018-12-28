@@ -20,7 +20,7 @@ The high level program flow is as follows:
   Program note: The function is_valid_url_start is used.
 
   3) If the URL is valid (starts with "http://" or "https://"), the program next will parse the domain name in the URL resource name
-  then heck if it is in DNS (and so is potentially accessible).
+  then check if it is in DNS (and so is potentially accessible).
   Program note: The functions parse_domain_name and is_dns_resolvable are used.
 
   4) If the domain name is potentially accessible (or is DNS resovable) , the program will check for reachablility to the URL 
