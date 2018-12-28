@@ -1,27 +1,44 @@
 # NPL-Challenge-2018-12
 Dec 2018 NPL Challenge
 
-This is my response to the Dec 2018 NPL challenge to create a python program to troubleshoot HTTP/HTTPS reachability to a URL that is input by the user from a prompt.
+This is my response to the Dec 2018 NPL challenge to create a python program to troubleshoot HTTP/HTTPS reachability to a URL that is input by the user from a prompt. I combined the base challenge and the bonus tasks together.
 
-The program is named "http_url_checker.py".
+The program is named "check_http_url.py".
 
-My basic plan was to check for a URL starting with "http://" or "https://".
-http_url_checker.py will either accept a string as an argument when ran (preferred), or ask the user to enter a URL.
+I decided this time to work in the 3.x Python environment, so I am using Python 3.7.
 
-If the URL is valid, the program next will verify domain name is in DNS (so is potentially accessible).
-Then the prgram will check for reachablility to the URL while verifying return code.
-
-If the program finds invalid HTTP, it will re-try the inputted string assuming entry is a fully qualified domain 
-or a valid IP address entry.
-
-I also set up a bash script called "test_url.sh" with examples file "test.tsv" that can be used to test multiple URLs cases.
-
-I decided to work in the 3.x Python environment, and so am using Python3.7.
-
-Program notes: 
 I use three Python modules: sys, socket, and requests. The sys and socket are Python defaults, but I had to install requests so that it could be used.
 
-I focused on using more functions for this program, including a main() fuction. I included doc strings for each function. 
+I focused on using mostly functions for this program, including a main() fuction. I included a docstring for each function to document how the functions should be used and for help in interactive mode.
+
+The high level program flow is as follows:
+  1) The program check_http_url.py will accept a URL string as an argument when run. 
+  (If the check_http_url.py is run without a provided URL, it will prompt the user to input a URL.)
+  Program note: The function get_url is used.
+
+  2) The progran will check for a URL starting with "http://" or "https://" as a protocol identifier.
+  Program note: The function is_valid_url_start is used.
+
+  3) If the URL is valid (starts with "http://" or "https://"), the program next will parse the domain name in the URL resource name
+  then heck if it is in DNS (and so is potentially accessible).
+  Program note: The functions parse_domain_name and is_dns_resolvable are used.
+
+  4) If the domain name is potentially accessible (or is DNS resovable) , the program will check for reachablility to the URL 
+  while verifying the HTTP return code using the requests module. 
+  Note 1: To handle known errors in the python "requests" module, I included a timeout with requests.get.
+  Note 2: I decided not to use ping to check for reachability, since some sites such as www.abs.com block ping.
+  Program note: The function check_http_status is used. 
+ 
+  5) If the program finds an invalid HTTP protocol identifier was entered, it will re-test the string under the assumption that 
+  the input may be either a fully qualified domain or a valid IP address entry. This test will look for both port 80 (HTTP) and 
+  port 443 (HTTPS) accessible.
+  Program notes: The function test_invalid_url_as_fqdn_or_ip is used, and it also uses is_dns_resolvable and check_http_status.
+  
+
+
+
+I also set up a bash script called "test_url.sh" that tests the examples in the file "test.tsv" to more quickly test multiple URLs cases.
+
 Here's the self-documenting description of my functions from running help on them interactively:
 
 >>> sys.argv
