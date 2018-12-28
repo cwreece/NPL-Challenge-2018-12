@@ -41,7 +41,7 @@ I also set up a bash script called "test_url.sh" that tests the examples in the 
 
 Here's the self-documenting description of my functions from running help on them interactively:
 
-">>> sys.argv
+>>> sys.argv
 ['http_url_checker.py']
 >>>
 
@@ -96,7 +96,7 @@ check_http_status(url: str) -> None
     
         :return: None
 
->>>"
+>>>
 >>> help(test_invalid_url_as_fqdn_or_ip)
 Help on function test_invalid_url_as_fqdn_or_ip in module __main__:
 
