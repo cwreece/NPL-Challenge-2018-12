@@ -24,7 +24,7 @@ def get_url() -> str:
     get_url either accepts a URL string entered when program is executed 
     or prompts user to enter a URL
     
-	:return: url
+    :return: url
 
     """
     try:
@@ -38,7 +38,7 @@ def is_valid_url_start(url: str) -> bool:
     """    
     is_valid_url_start verfies a URL starts with "http://" or "https://"
     
-	:return: boolean - True or False
+    :return: boolean - True or False
     """
     return url.startswith("http://") or url.startswith("https://")
 
@@ -46,7 +46,7 @@ def parse_domain_name(url: str) -> str:
     """    
     parse_domain_name extracts a domain name from a valid URL
     
-	:return: domain_name
+    :return: domain_name
     """
     assert is_valid_url_start(url)
     testUrl = url.split("//")
@@ -66,7 +66,7 @@ def is_dns_resolvable(domain_name: str) -> bool:
     The program will use the python 'requests' module to check http/https status and reachability,
     since a ping test may fail for servers that block ping such as www.abs.com.
 
-	:return: boolean - True if resolvable or an IP address, else False
+    :return: boolean - True if resolvable or an IP address, else False
     """
     try:
         # Remove comment in next line as needed for troubleshooting
@@ -88,7 +88,7 @@ def check_ping(domain_name: str) -> bool:
     
     Note: check_ping may help diagnose reachable IP with a server issue.
      
-	:return: boolean - True if domain_name is pingable, else False
+    :return: boolean - True if domain_name is pingable, else False
     """
     ping_command = ['ping', domain_name, '-c 1']
     ping_output = subprocess.run(ping_command,False,stdout=subprocess.PIPE)
@@ -101,7 +101,7 @@ def check_http_status(url: str) -> None:
         
     check_http_status attempts an HTTP request and prints the status.
     
-	:return: None
+    :return: None
     """
     try:
         # Need to include a timeout on the request.get so the program will not hang indefinitely for non-reachable IPs
@@ -133,7 +133,7 @@ def test_invalid_url_as_fqdn_or_ip(url: str) -> None:
         
     test_invalid_url_as_fqdn_or_ip attempts to parse input string as a FQDN or an IP
     
-	:return: None
+    :return: None
     """
     
     resource = url.split("/")
@@ -156,7 +156,7 @@ def main():
         
     main function calls other functions to support the program goal of testing URLs
     
-	:return: None
+    :return: None
     """
     url = get_url()
     if is_valid_url_start(url):
@@ -181,5 +181,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
