@@ -1,7 +1,7 @@
 # NPL-Challenge-2018-12
 Dec 2018 NPL Challenge
 
-This is my response to the Dec 2018 NPL challenge to create a python program to troubleshoot HTTP/HTTPS reachability to a URL that is input by the user from a prompt. I combined the base challenge and the bonus tasks together.
+This is my response to the Dec 2018 NPL challenge to create a python program to troubleshoot HTTP/HTTPS reachability to a URL that is input by the user. I combined the base challenge and the bonus tasks together.
 
 The program is named "check_http_url.py".
 
@@ -32,7 +32,8 @@ The high level program flow is as follows:
   5) If the program finds an invalid HTTP protocol identifier was entered, the program will re-test the string under the assumption that
   the input may be either a fully qualified domain or a valid IP address entry. This test will look for both port 80 (HTTP) and
   port 443 (HTTPS) accessible.
-  Program notes: The function test_invalid_url_as_fqdn_or_ip is used, and it also uses is_dns_resolvable, and may use check_ping and check_http_status.
+  Program notes: The function test_invalid_url_as_fqdn_or_ip is used, and it also uses is_dns_resolvable, and may use check_ping 
+  and check_http_status.
 
 
 
