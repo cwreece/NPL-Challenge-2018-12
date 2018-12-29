@@ -17,3 +17,5 @@ http://www.abc.com	Success
 https://www.abc.com	HTTP_Request_Error
 http://www.abs.com	Success
 www.abs.com	Success_when_prepend_http://
+http://uscp.gov	Unknown_DNS_name
+https://vpn2.uscp.gov	Success_for_HTTP_but_not_pingable
