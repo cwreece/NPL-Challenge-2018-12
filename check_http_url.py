@@ -1,16 +1,16 @@
 #!/usr/bin/env python3.7
-# Challenge2 code using 3.7 environment
+# NPL Challenge2 code using 3.7 environment by Carole Warner Reece
 #
 
 import sys
 import socket
 import requests
+import subprocess
 
-
-# My plan is to check for HTTP URLs starting with "http://" or "https://", 
+# My plan is to check for URL starting with "http://" or "https://", 
 # then verify domain name is in DNS (so is potentially accessible),
 # then check for reachablility while verifying return code.
-# If find invalid HTTP, try assuming entry is a fully qualified domain 
+# If find an invalid HTTP start string, try assuming entry is a fully qualified domain 
 # or a valid IP address entry.
 
 # Optionally use bash script "test_url.sh" with examples file "test.tsv"
@@ -62,7 +62,7 @@ def is_dns_resolvable(domain_name: str) -> bool:
     or that a valid IP address has been entered.
     check_dns also prints status to the screen.
     
-    Note: if a domain_name is not resolvable, you will never reach it, so no need to check further.
+    Note: if a domain_name is not resolvable, you will never reach it.
     The program will use the python 'requests' module to check http/https status and reachability,
     since a ping test may fail for servers that block ping such as www.abs.com.
 
@@ -77,8 +77,24 @@ def is_dns_resolvable(domain_name: str) -> bool:
         print ("The IP address is",dns_ip)
         return True
     except:
-        print(domain_name,"is unknown in DNS, so is not reachable.")
-        return False
+       print("The domain name is unknown in DNS, so is not HTTP reachable.")
+       return False
+
+def check_ping(domain_name: str) -> bool:
+    """
+        
+    check_ping attempts to ping a domain name and returns True if domain_name is accessible.
+    check_ping uses the subprocess and the platform modules
+    
+    Note: check_ping may help diagnose reachable IP with a server issue.
+     
+	:return: boolean - True if domain_name is pingable, else False
+    """
+    ping_command = ['ping', domain_name, '-c 1']
+    ping_output = subprocess.run(ping_command,False,stdout=subprocess.PIPE)
+    success = ping_output.returncode
+    return True if success == 0 else False
+
 
 def check_http_status(url: str) -> None:
     """
@@ -122,8 +138,11 @@ def test_invalid_url_as_fqdn_or_ip(url: str) -> None:
     
     resource = url.split("/")
     domain_name = resource[0]
-    # domain_name = url
     if is_dns_resolvable(domain_name):
+        if check_ping(domain_name):
+            print("Ping is successful to",domain_name)
+        else: 
+            print("Ping is NOT successful to",domain_name)
         http_url = "http://" + url
         print ("Checking HTTP version or",http_url)
         check_http_status(http_url)
@@ -142,6 +161,10 @@ def main():
     url = get_url()
     if is_valid_url_start(url):
         domain_name = parse_domain_name(url)
+        if check_ping(domain_name):
+           print("Ping is successful to",domain_name)
+        else: 
+            print("Ping is NOT successful to",domain_name)
         if is_dns_resolvable(domain_name):
             check_http_status(url)
     
