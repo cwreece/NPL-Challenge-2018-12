@@ -1,0 +1,325 @@
+NPL-Challenge-2018-12 cwr$ bash test_url.sh check_http_url.py
+#################################################################
+This bash script tests multiple URLs found in the test.tsv file
+against check_http_url.py - either a specified python script or a default script
+and compares the results the against the expected results.
+#################################################################
+     
+     
+.......  testing a new URL
+######################################################
+# URL: http:/www.netcraftsman.com                         
+# Expected Result: Invalid_URL                                        
+######################################################
+     
+Invalid URL syntax. The URL needs to start with http:// or https:// 
+
+(Testing for case where a fully qualified domain name or
+ an IP address was entered.) 
+
+The domain name is unknown in DNS, so is not HTTP reachable.
+     
+     
+.......  testing a new URL
+######################################################
+# URL: http://www.netcraftswomen.com                      
+# Expected Result: Unknown_DNS_name                                   
+######################################################
+     
+The domain name is:  www.netcraftswomen.com
+ping: cannot resolve www.netcraftswomen.com: Unknown host
+Ping is NOT successful to www.netcraftswomen.com
+The domain name is unknown in DNS, so is not HTTP reachable.
+     
+     
+.......  testing a new URL
+######################################################
+# URL: http://vstcex410cssw02.at.gwu.edu                  
+# Expected Result: Unreachable_IP                                     
+######################################################
+     
+The domain name is:  vstcex410cssw02.at.gwu.edu
+Ping is NOT successful to vstcex410cssw02.at.gwu.edu
+The IP address is 172.20.180.3
+There was an error resolving the URL. The reason was: 
+ HTTPConnectionPool(host='vstcex410cssw02.at.gwu.edu', port=80): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x10aee85c0>, 'Connection to vstcex410cssw02.at.gwu.edu timed out. (connect timeout=3)'))
+     
+     
+.......  testing a new URL
+######################################################
+# URL: https://www.google.com                             
+# Expected Result: Success                                            
+######################################################
+     
+The domain name is:  www.google.com
+Ping is successful to www.google.com
+The IP address is 172.217.7.132
+The request status code is 200
+Success. The server appears to be online and functioning correctly.
+     
+     
+.......  testing a new URL
+######################################################
+# URL: https://www.nbc.com/the-voice                      
+# Expected Result: Success                                            
+######################################################
+     
+The domain name is:  www.nbc.com
+Ping is successful to www.nbc.com
+The IP address is 23.54.149.4
+The request status code is 200
+Success. The server appears to be online and functioning correctly.
+     
+     
+.......  testing a new URL
+######################################################
+# URL: www.nbc.com/the-voice                              
+# Expected Result: Success_when_prepend_http://_or_https://           
+######################################################
+     
+Invalid URL syntax. The URL needs to start with http:// or https:// 
+
+(Testing for case where a fully qualified domain name or
+ an IP address was entered.) 
+
+The IP address is 23.54.149.4
+Ping is successful to www.nbc.com
+Checking HTTP version or http://www.nbc.com/the-voice
+The request status code is 200
+Success. The server appears to be online and functioning correctly.
+
+Checking HTTPS version or https://www.nbc.com/the-voice
+The request status code is 200
+Success. The server appears to be online and functioning correctly.
+     
+     
+.......  testing a new URL
+######################################################
+# URL: http://httpbin.org/status/400                      
+# Expected Result: HTTP_Error_400                                     
+######################################################
+     
+The domain name is:  httpbin.org
+Ping is NOT successful to httpbin.org
+The IP address is 52.72.145.109
+The request status code is 400
+The requested page http://httpbin.org/status/400 is not working.
+     
+     
+.......  testing a new URL
+######################################################
+# URL: http://httpbin.org/status/404                      
+# Expected Result: HTTP_Error_404                                     
+######################################################
+     
+The domain name is:  httpbin.org
+Ping is NOT successful to httpbin.org
+The IP address is 52.45.84.34
+The request status code is 404
+The requested page http://httpbin.org/status/404 is not available.
+     
+     
+.......  testing a new URL
+######################################################
+# URL: http://httpbin.org/status/500                      
+# Expected Result: HTTP_Error_500                                     
+######################################################
+     
+The domain name is:  httpbin.org
+Ping is NOT successful to httpbin.org
+The IP address is 52.73.9.93
+The request status code is 500
+Internal server error. The requested page http://httpbin.org/status/500 is not available.
+     
+     
+.......  testing a new URL
+######################################################
+# URL: http://httpbin.org/status/502                      
+# Expected Result: HTTP_Error_502                                     
+######################################################
+     
+The domain name is:  httpbin.org
+Ping is NOT successful to httpbin.org
+The IP address is 52.54.84.112
+The request status code is 502
+Bad gateway. The requested page http://httpbin.org/status/502 is not available.
+     
+     
+.......  testing a new URL
+######################################################
+# URL: https://httpstat.us                                
+# Expected Result: Success                                            
+######################################################
+     
+The domain name is:  httpstat.us
+Ping is NOT successful to httpstat.us
+The IP address is 23.99.0.12
+The request status code is 200
+Success. The server appears to be online and functioning correctly.
+     
+     
+.......  testing a new URL
+######################################################
+# URL: 1.1.1.1                                            
+# Expected Result: Success_when_prepend_http://_or_https://           
+######################################################
+     
+Invalid URL syntax. The URL needs to start with http:// or https:// 
+
+(Testing for case where a fully qualified domain name or
+ an IP address was entered.) 
+
+The IP address is 1.1.1.1
+Ping is successful to 1.1.1.1
+Checking HTTP version or http://1.1.1.1
+The request status code is 200
+Success. The server appears to be online and functioning correctly.
+
+Checking HTTPS version or https://1.1.1.1
+The request status code is 200
+Success. The server appears to be online and functioning correctly.
+     
+     
+.......  testing a new URL
+######################################################
+# URL: 1.1.1.1000                                         
+# Expected Result: Invalid_URL_not_a_FQDN_in_DNS                      
+######################################################
+     
+Invalid URL syntax. The URL needs to start with http:// or https:// 
+
+(Testing for case where a fully qualified domain name or
+ an IP address was entered.) 
+
+The domain name is unknown in DNS, so is not HTTP reachable.
+     
+     
+.......  testing a new URL
+######################################################
+# URL: www.abc.com                                        
+# Expected Result: Success_when_prepend_http://                       
+######################################################
+     
+Invalid URL syntax. The URL needs to start with http:// or https:// 
+
+(Testing for case where a fully qualified domain name or
+ an IP address was entered.) 
+
+The IP address is 199.181.132.250
+Ping is successful to www.abc.com
+Checking HTTP version or http://www.abc.com
+The request status code is 200
+Success. The server appears to be online and functioning correctly.
+
+Checking HTTPS version or https://www.abc.com
+There was an error resolving the URL. The reason was: 
+ HTTPSConnectionPool(host='www.abc.com', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.VerifiedHTTPSConnection object at 0x110b47b70>: Failed to establish a new connection: [Errno 61] Connection refused'))
+     
+     
+.......  testing a new URL
+######################################################
+# URL: www.nbc.com                                        
+# Expected Result: Success_when_prepend_http://_or_https://           
+######################################################
+     
+Invalid URL syntax. The URL needs to start with http:// or https:// 
+
+(Testing for case where a fully qualified domain name or
+ an IP address was entered.) 
+
+The IP address is 23.54.149.4
+Ping is successful to www.nbc.com
+Checking HTTP version or http://www.nbc.com
+The request status code is 200
+Success. The server appears to be online and functioning correctly.
+
+Checking HTTPS version or https://www.nbc.com
+The request status code is 200
+Success. The server appears to be online and functioning correctly.
+     
+     
+.......  testing a new URL
+######################################################
+# URL: http://www.abc.com                                 
+# Expected Result: Success                                            
+######################################################
+     
+The domain name is:  www.abc.com
+Ping is successful to www.abc.com
+The IP address is 199.181.132.250
+The request status code is 200
+Success. The server appears to be online and functioning correctly.
+     
+     
+.......  testing a new URL
+######################################################
+# URL: https://www.abc.com                                
+# Expected Result: HTTP_Request_Error                                 
+######################################################
+     
+The domain name is:  www.abc.com
+Ping is successful to www.abc.com
+The IP address is 199.181.132.250
+There was an error resolving the URL. The reason was: 
+ HTTPSConnectionPool(host='www.abc.com', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.VerifiedHTTPSConnection object at 0x109c13400>: Failed to establish a new connection: [Errno 61] Connection refused'))
+     
+     
+.......  testing a new URL
+######################################################
+# URL: http://www.abs.com                                 
+# Expected Result: Success                                            
+######################################################
+     
+The domain name is:  www.abs.com
+Ping is NOT successful to www.abs.com
+The IP address is 204.89.152.210
+The request status code is 200
+Success. The server appears to be online and functioning correctly.
+     
+     
+.......  testing a new URL
+######################################################
+# URL: www.abs.com                                        
+# Expected Result: Success_when_prepend_http://                       
+######################################################
+     
+Invalid URL syntax. The URL needs to start with http:// or https:// 
+
+(Testing for case where a fully qualified domain name or
+ an IP address was entered.) 
+
+The IP address is 204.89.152.210
+Ping is NOT successful to www.abs.com
+Checking HTTP version or http://www.abs.com
+The request status code is 200
+Success. The server appears to be online and functioning correctly.
+
+Checking HTTPS version or https://www.abs.com
+There was an error resolving the URL. The reason was: 
+ HTTPSConnectionPool(host='www.abs.com', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.VerifiedHTTPSConnection object at 0x10bd92390>: Failed to establish a new connection: [Errno 61] Connection refused'))
+     
+     
+.......  testing a new URL
+######################################################
+# URL: http://uscp.gov                                    
+# Expected Result: Unknown_DNS_name                                   
+######################################################
+     
+The domain name is:  uscp.gov
+ping: cannot resolve uscp.gov: Unknown host
+Ping is NOT successful to uscp.gov
+The domain name is unknown in DNS, so is not HTTP reachable.
+     
+     
+.......  testing a new URL
+######################################################
+# URL: https://vpn2.uscp.gov                              
+# Expected Result: Success_for_HTTP_but_not_pingable                  
+######################################################
+     
+The domain name is:  vpn2.uscp.gov
+Ping is NOT successful to vpn2.uscp.gov
+The IP address is 192.42.110.157
+The request status code is 200
+Success. The server appears to be online and functioning correctly.
+NPL-Challenge-2018-12 cwr$ 
