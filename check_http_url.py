@@ -142,13 +142,19 @@ def check_http_status(url: str) -> None:
 
 def test_invalid_url_as_fqdn_or_ip(url: str) -> None:
     """
-    test_invalid_url_as_fqdn_or_ip attempts to parse input string as a FQDN or an IP
+    test_invalid_url_as_fqdn_or_ip checks a string in case it is either a FQDN or an IP.
+    If the string is resolvable in DNS or a valid IP, it is tested with ping and
+    both port 80 and 443.
+    
+    test_invalid_url_as_fqdn_or_ip also prints status to the screen.
 
     :return: None
     """
 
+    # Assuming a FQDN in the sting, pull the domain name from the url
     resource = url.split("/")
     domain_name = resource[0]
+    # If the domain name is in DNS or is a valid IP address, continue testing.
     if is_dns_resolvable(domain_name):
         if check_ping(domain_name):
             print("Ping is successful to", domain_name)
@@ -165,6 +171,8 @@ def test_invalid_url_as_fqdn_or_ip(url: str) -> None:
 def main():
     """
     main function calls other functions to support the program goal of testing URLs
+    
+    main also prints status to the screen.
 
     :return: None
     """

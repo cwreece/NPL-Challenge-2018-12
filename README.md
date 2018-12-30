@@ -114,7 +114,11 @@ Here's the self-documenting description of my functions from running help on the
 		Help on function test_invalid_url_as_fqdn_or_ip in module __main__:
 
 		test_invalid_url_as_fqdn_or_ip(url: str) -> None
-			test_invalid_url_as_fqdn_or_ip attempts to parse input string as a FQDN or an IP
+			test_invalid_url_as_fqdn_or_ip checks a string in case it is either a FQDN or an IP.
+			If the string is resolvable in DNS or a valid IP, it is tested with ping and
+			both port 80 and 443.
+    
+			test_invalid_url_as_fqdn_or_ip also prints status to the screen.
 	
 			:return: None
 
@@ -125,6 +129,8 @@ Here's the self-documenting description of my functions from running help on the
 		main()
 			main function calls other functions to support the program goal of testing URLs
 	
-			:return: None
+			main also prints status to the screen.
+			
+            :return: None
 
 		>>> 
