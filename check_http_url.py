@@ -3,13 +3,13 @@
 #
 """
 My plan is to check for URL starting with "http://" or "https://",
-then verify domain name is in DNS(so is potentially accessible),
+then verify domain name is in DNS (so is potentially accessible),
 then check for reachablility while verifying return code.
 If find an invalid HTTP start string, try assuming entry is a fully qualified domain
 or a valid IP address entry.
 
 Optionally for testing, I use the bash script "test_url.sh" with examples file
-"test.tsv"vto test multiple URLs cases.
+"test.tsv" to test multiple URLs cases.
 """
 
 import sys
