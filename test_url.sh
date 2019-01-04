@@ -18,7 +18,7 @@ while read url expected_result
 do
 	echo "     "
 	echo "     "
-    echo ".......  testing a new URL"
+        echo ".......  testing a new URL"
 	echo "######################################################"
 	printf "# URL: %-50s \n" $url
 	printf "# Expected Result: %-50s \n" $expected_result
